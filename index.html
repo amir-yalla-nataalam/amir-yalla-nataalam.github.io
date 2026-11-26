@@ -1,0 +1,69 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#6c5ce7">
+<title>يلا نتعلم</title><style>
+:root{--p:#6c5ce7;--y:#ffd93d;--g:#2ed573;--r:#ff6b81;--b:#1e90ff}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
+body{margin:0;min-height:100vh;font-family:"Segoe UI","Noto Sans Arabic",system-ui,sans-serif;background:linear-gradient(180deg,#a29bfe 0,#74b9ff 45%,#ffeaa7 100%);background-attachment:fixed;color:#2d3436}
+#app{max-width:480px;margin:auto;padding:12px 14px 30px}
+.top{display:flex;justify-content:space-between;align-items:center;color:#fff;font-weight:800}
+.logo{font-size:24px;text-shadow:0 2px 0 rgba(0,0,0,.15)}
+.stars{background:#fff;color:#e17055;border-radius:20px;padding:6px 14px;font-size:20px;font-weight:800;box-shadow:0 3px 0 rgba(0,0,0,.12)}
+.hello{background:#fff;border-radius:24px;padding:12px 16px;margin:12px 0;display:flex;gap:12px;align-items:center;box-shadow:0 5px 0 rgba(0,0,0,.1);font-weight:700;font-size:17px}
+.hello .mascot{font-size:46px;animation:bob 2s ease-in-out infinite}
+h3{color:#fff;margin:14px 4px 8px;font-size:19px;text-shadow:0 2px 0 rgba(0,0,0,.15)}
+.langs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 8px}
+.lang{flex:0 0 auto;background:#fff;border:3px solid transparent;border-radius:20px;padding:8px 14px;font:inherit;font-weight:800;font-size:17px;box-shadow:0 4px 0 rgba(0,0,0,.12)}
+.lang.on{border-color:var(--p);background:#f1edff;transform:scale(1.06)}
+.cats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cat{border:0;border-radius:26px;padding:16px 8px;color:#fff;font:inherit;font-weight:800;font-size:19px;box-shadow:0 6px 0 rgba(0,0,0,.18);transition:transform .1s}
+.cat:active,.btn:active,.opt:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.18)}
+.cat .e{font-size:54px;display:block;margin-bottom:4px}
+.cat small{display:block;font-size:12px;opacity:.9;font-weight:600}
+.bar{height:8px;background:rgba(255,255,255,.4);border-radius:8px;margin-top:8px;overflow:hidden}.bar i{display:block;height:100%;background:#fff}
+.back{background:#fff;border:0;border-radius:18px;padding:8px 16px;font:inherit;font-weight:800;font-size:17px;box-shadow:0 4px 0 rgba(0,0,0,.12)}
+.card{background:#fff;border-radius:34px;margin:14px 0;padding:22px 14px;box-shadow:0 8px 0 rgba(0,0,0,.12)}
+.emoji{font-size:130px;line-height:1.1;animation:pop .5s}
+.word{font-size:46px;font-weight:900;color:var(--p);direction:ltr;margin:6px 0}
+.tr{font-size:28px;font-weight:700;color:#636e72}
+.row{display:flex;gap:10px;justify-content:center;margin-top:10px}
+.btn{border:0;border-radius:22px;padding:14px 22px;font:inherit;font-weight:800;font-size:20px;color:#fff;box-shadow:0 6px 0 rgba(0,0,0,.18)}
+.dots{color:#fff;text-align:center;font-weight:800;margin-top:6px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.opt{border:0;background:#fff;border-radius:26px;font-size:68px;padding:12px;box-shadow:0 6px 0 rgba(0,0,0,.14)}
+.opt.ok{background:#b8f5c9;animation:pop .4s}.opt.no{background:#ffd0d6;animation:shake .4s}
+.q{color:#fff;font-weight:800;font-size:20px;text-align:center;margin:10px 0}
+.fall{position:fixed;top:-50px;font-size:34px;animation:fall 1.8s linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+@keyframes pop{0%{transform:scale(.4)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+@keyframes bob{50%{transform:translateY(-7px)}}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+</style></head><body><div id="app"></div><script>
+const D={animals:["🐱","قطة","cat","chat","gato","Katze","kedi","🐶","كلب","dog","chien","perro","Hund","köpek","🐴","حصان","horse","cheval","caballo","Pferd","at","🐘","فيل","elephant","éléphant","elefante","Elefant","fil","🦁","أسد","lion","lion","león","Löwe","aslan","🐟","سمكة","fish","poisson","pez","Fisch","balık","🐦","عصفور","bird","oiseau","pájaro","Vogel","kuş","🐰","أرنب","rabbit","lapin","conejo","Hase","tavşan"],
+fruits:["🍎","تفاحة","apple","pomme","manzana","Apfel","elma","🍌","موزة","banana","banane","plátano","Banane","muz","🍊","برتقالة","orange","orange","naranja","Orange","portakal","🍇","عنب","grapes","raisin","uvas","Trauben","üzüm","🍉","بطيخ","watermelon","pastèque","sandía","Wassermelone","karpuz","🍓","فراولة","strawberry","fraise","fresa","Erdbeere","çilek","🍐","كمثرى","pear","poire","pera","Birne","armut","🍋","ليمون","lemon","citron","limón","Zitrone","limon"],
+colors:["🔴","أحمر","red","rouge","rojo","rot","kırmızı","🔵","أزرق","blue","bleu","azul","blau","mavi","🟢","أخضر","green","vert","verde","grün","yeşil","🟡","أصفر","yellow","jaune","amarillo","gelb","sarı","🟠","برتقالي","orange","orange","naranja","orange","turuncu","🟣","بنفسجي","purple","violet","morado","lila","mor","⚫","أسود","black","noir","negro","schwarz","siyah","⚪","أبيض","white","blanc","blanco","weiß","beyaz"],
+things:["🏠","بيت","house","maison","casa","Haus","ev","🚗","سيارة","car","voiture","coche","Auto","araba","⚽","كرة","ball","ballon","pelota","Ball","top","📚","كتاب","book","livre","libro","Buch","kitap","☀️","شمس","sun","soleil","sol","Sonne","güneş","🌙","قمر","moon","lune","luna","Mond","ay","🌳","شجرة","tree","arbre","árbol","Baum","ağaç","💧","ماء","water","eau","agua","Wasser","su"],
+numbers:["1️⃣","واحد","one","un","uno","eins","bir","2️⃣","اثنان","two","deux","dos","zwei","iki","3️⃣","ثلاثة","three","trois","tres","drei","üç","4️⃣","أربعة","four","quatre","cuatro","vier","dört","5️⃣","خمسة","five","cinq","cinco","fünf","beş","6️⃣","ستة","six","six","seis","sechs","altı","7️⃣","سبعة","seven","sept","siete","sieben","yedi","8️⃣","ثمانية","eight","huit","ocho","acht","sekiz","9️⃣","تسعة","nine","neuf","nueve","neun","dokuz","🔟","عشرة","ten","dix","diez","zehn","on"]};
+const CATS=[["animals","🐘","حيوانات","#ff7675"],["fruits","🍓","فواكه","#fd9644"],["colors","🎨","ألوان","#a55eea"],["numbers","🔢","أرقام","#26a69a"],["things","🏠","أشياء","#4b7bec"]];
+const LANGS=[["en","🇬🇧","English","en-US"],["fr","🇫🇷","Français","fr-FR"],["es","🇪🇸","Español","es-ES"],["de","🇩🇪","Deutsch","de-DE"],["tr","🇹🇷","Türkçe","tr-TR"]];
+const IDX={en:2,fr:3,es:4,de:5,tr:6};
+const items=c=>{const a=D[c],o=[];for(let i=0;i<a.length;i+=7)o.push(a.slice(i,i+7));return o};
+let S=JSON.parse(localStorage.getItem("bh")||'{"lang":"en","stars":0,"done":{}}');
+const save=()=>localStorage.setItem("bh",JSON.stringify(S));
+const $=document.getElementById("app");
+const lc=()=>LANGS.find(l=>l[0]==S.lang)[3];
+function say(t,l){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang=l;u.rate=.85;speechSynthesis.speak(u)}catch(e){}}
+function boom(a){for(let i=0;i<14;i++){const e=document.createElement("div");e.className="fall";e.textContent=a[i%a.length];e.style.left=Math.random()*95+"vw";e.style.animationDelay=Math.random()*.5+"s";document.body.appendChild(e);setTimeout(()=>e.remove(),2500)}}
+const hdr=()=>`<div class="top"><div class="logo">🌈 يلا نتعلم</div><div class="stars">⭐ ${S.stars}</div></div>`;
+function home(){const L=LANGS.find(l=>l[0]==S.lang);
+$.innerHTML=hdr()+`<div class="hello"><span class="mascot">🦉</span><span>أهلاً يا بطل! النهارده هنتعلم ${L[2]} ${L[1]}. اختار درس!</span></div><h3>🌍 اختار اللغة</h3><div class="langs">${LANGS.map(l=>`<button class="lang ${l[0]==S.lang?"on":""}" onclick="S.lang='${l[0]}';save();home()">${l[1]} ${l[2]}</button>`).join("")}</div><h3>📚 الدروس</h3><div class="cats">${CATS.map(c=>{const n=items(c[0]).length,d=(S.done[S.lang+c[0]]||0);return `<button class="cat" style="background:${c[3]}" onclick="learn('${c[0]}',0)"><span class="e">${c[1]}</span>${c[2]}<small>${d}/${n} كلمات</small><div class="bar"><i style="width:${d/n*100}%"></i></div></button>`}).join("")}</div><h3>🎮 لعبة</h3><button class="btn" style="width:100%;background:#00b894" onclick="quiz()">🎧 اسمع واختار الصورة</button>`}
+function learn(c,i){const a=items(c),w=a[i],L=IDX[S.lang],cat=CATS.find(x=>x[0]==c);
+S.done[S.lang+c]=Math.max(S.done[S.lang+c]||0,i+1);save();
+$.innerHTML=hdr()+`<div style="margin-top:10px"><button class="back" onclick="home()">➡️ رجوع</button></div><div class="card" style="text-align:center"><div class="emoji">${w[0]}</div><div class="word">${w[L]}</div><div class="tr">${w[1]}</div><div class="row"><button class="btn" style="background:var(--b)" onclick="say('${w[L]}','${lc()}')">🔊 اسمع</button></div></div><div class="row"><button class="btn" style="background:#b2bec3" ${i==0?"disabled":""} onclick="learn('${c}',${i-1})">◀️</button><button class="btn" style="background:${cat[3]}" onclick="${i<a.length-1?`learn('${c}',${i+1})`:`S.stars+=3;save();boom(['⭐','🎉','🌟']);home()`}">${i<a.length-1?"التالي ▶️":"خلصت! 🎉"}</button></div><div class="dots">${i+1} / ${a.length}</div>`;
+setTimeout(()=>say(w[L],lc()),300)}
+let cur=null;
+function quiz(msg){const c=CATS[Math.random()*CATS.length|0][0],a=items(c),L=IDX[S.lang];const ans=a[Math.random()*a.length|0];let o=[ans];while(o.length<4){const x=a[Math.random()*a.length|0];if(!o.includes(x))o.push(x)}o.sort(()=>Math.random()-.5);cur=ans;
+$.innerHTML=hdr()+`<div style="margin-top:10px"><button class="back" onclick="home()">➡️ رجوع</button></div><div class="q">${msg||"اسمع الكلمة واختار الصورة الصح"}</div><div class="row" style="margin-bottom:12px"><button class="btn" style="background:var(--b)" onclick="say('${ans[L]}','${lc()}')">🔊 اسمع</button></div><div class="opts">${o.map((x,i)=>`<button class="opt" onclick="pick(this,${x==ans})">${x[0]}</button>`).join("")}</div>`;
+setTimeout(()=>say(ans[L],lc()),300)}
+function pick(b,ok){if(ok){b.classList.add("ok");S.stars++;save();boom(["⭐","🎉"]);say("Great!","en-US");setTimeout(()=>quiz("برافو! 🎉 كمّل"),1100)}else{b.classList.add("no");say("Try again","en-US")}}
+const P=location.hash.slice(1).split("-");if(P[1]&&IDX[P[1]])S.lang=P[1];if(P[0]=="learn")learn(P[2]||"animals",+P[3]||0);else if(P[0]=="quiz")quiz();else home();
+</script></body></html>
